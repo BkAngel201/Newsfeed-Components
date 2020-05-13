@@ -128,12 +128,20 @@ const articleMaker = (dataElements) => {
   expandBtn.addEventListener('click', () => {
     article.classList.toggle('article-open')
     if(article.classList.contains('article-open')) {
-      expandBtn.textContent = '\u25b2'
+      expandBtn.textContent = 'Click to Close'
     } else {
-      expandBtn.textContent = '\u25bc'
+      expandBtn.textContent = 'Click to Expand'
     }
   })
-  expandBtn.textContent = '\u25bc'
+  expandBtn.textContent = 'Click to Expand'
+
+  const closeBtn = document.createElement('span')
+  closeBtn.textContent = '\u274c'
+  closeBtn.classList.add('closeButton')
+  closeBtn.addEventListener('click', event => {
+    article.classList.add('articleClose')
+  })
+  article.appendChild(closeBtn)
   
   article.appendChild(expandBtn)
 

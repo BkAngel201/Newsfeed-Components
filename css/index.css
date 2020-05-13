@@ -48,6 +48,7 @@
   height: 50px;
   overflow: hidden;
   box-shadow: 2px 2px 2px lightgrey;
+  transition: all 0.6s ease-in-out;
 }
 .article h2 {
   font-size: 28px;
@@ -73,8 +74,31 @@
   transform: translate(-50%);
   background-color: white;
 }
+.article .closeButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 0.9rem;
+}
+.article .closeButton:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+.article p:not(.date) {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
 .article-open {
   height: 400px;
+}
+.article-open p:not(.date) {
+  opacity: 1;
+}
+.articleClose {
+  height: 0px;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
 }
 .menu-button {
   position: absolute;
