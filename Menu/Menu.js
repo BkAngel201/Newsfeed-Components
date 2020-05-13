@@ -13,7 +13,9 @@ let menuItems = [
 const menuMaker = (menuItems) => {
   const menu = document.createElement('div')
   menu.classList.add('menu')
-
+  menu.addEventListener('click', (event) => {
+    event.stopPropagation()
+  })
   const uList = document.createElement('ul')
   menu.appendChild(uList)
 
@@ -24,21 +26,24 @@ const menuMaker = (menuItems) => {
   })
 
   const menuBtn = document.querySelector('.menu-button')
-  menuBtn.addEventListener('click', () => {
-    
-   if(menu.style.left != '0px') {
+    menuBtn.addEventListener('click', (event) => {
+    event.stopPropagation()
+    if(menu.style.left != '0px') {
       gsap.from(".menu", {duration: .5, left: "-350px"})
       gsap.to(".menu", {left: 0})
-   } else {
-    gsap.from(".menu", {duration: .5, left: "0px"})
-    gsap.to(".menu", {left: '-350px'})
-   }
+    } else {
+      gsap.from(".menu", {duration: .5, left: "0px"})
+      gsap.to(".menu", {left: '-350px'})
+    }
     
   })
 
   return menu
 }
 
+document.querySelector('html').addEventListener('click', () => {
+  gsap.to(".menu", {left: '-350px'})
+})
 
 /* 
   Step 1: Write a component called 'menuMaker' to create a menu like the markup below:
