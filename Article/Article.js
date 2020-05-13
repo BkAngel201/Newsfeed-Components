@@ -179,3 +179,15 @@ const articlesElement = document.querySelector('.articles')
 data.forEach(el => {
   articlesElement.appendChild(articleMaker(el))  
 })
+
+
+const submitBtnForm = document.querySelector('#submitButton')
+submitBtnForm.addEventListener('click', (e) => {
+  e.preventDefault()
+  const articleTitle = document.querySelector('#articleTitle').value
+  const articleDate = document.querySelector('#articleDate').value
+  const articleContent1 = document.querySelector('#articleContent1').value
+  const articleContent2 = document.querySelector('#articleContent2').value
+  const articleContent3 = document.querySelector('#articleContent3').value
+  articlesElement.appendChild(articleMaker({title: articleTitle, date: articleDate, firstParagraph: articleContent1, secondParagraph: articleContent2, thirdParagraph: articleContent3})) 
+})
