@@ -26,13 +26,14 @@ const menuMaker = (menuItems) => {
   const menuBtn = document.querySelector('.menu-button')
   menuBtn.addEventListener('click', () => {
     
-    if(menu.style.opacity == 0) {
-      gsap.from(".menu", {duration: .5, opacity:0})
-      gsap.to(".menu", {opacity:1})
-    } else {
-      gsap.from(".menu", {duration: .5, opacity:1})
-      gsap.to(".menu", {opacity:0})
-    }
+   if(menu.style.left != '0px') {
+      gsap.from(".menu", {duration: .5, left: "-350px"})
+      gsap.to(".menu", {left: 0})
+   } else {
+    gsap.from(".menu", {duration: .5, left: "0px"})
+    gsap.to(".menu", {left: '-350px'})
+   }
+    
   })
 
   return menu
