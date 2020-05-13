@@ -25,7 +25,14 @@ const menuMaker = (menuItems) => {
 
   const menuBtn = document.querySelector('.menu-button')
   menuBtn.addEventListener('click', () => {
-    menu.classList.toggle('menu--open')
+    
+    if(menu.style.opacity == 0) {
+      gsap.from(".menu", {duration: .5, opacity:0})
+      gsap.to(".menu", {opacity:1})
+    } else {
+      gsap.from(".menu", {duration: .5, opacity:1})
+      gsap.to(".menu", {opacity:0})
+    }
   })
 
   return menu
