@@ -85,8 +85,72 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'ElectronVolt',
+    date: 'Aug 24th, 2019',
+    firstParagraph: `In physics, an electronvolt (symbol eV, also written electron-volt and electron volt) is the amount of kinetic energy gained (or lost) by a single electron accelerating from rest through an electric potential difference of one volt in vacuum. When used as a unit of energy, the numerical value of 1 eV in joules (symbol J) is equivalent to the numerical value of the charge of an electron in coulombs (symbol C). Under the 2019 redefinition of the SI base units, this sets 1 eV equal to 1.602176634×10−19 J.`,
+
+    secondParagraph: `Historically, the electronvolt was devised as a standard unit of measure through its usefulness in electrostatic particle accelerator sciences, because a particle with electric charge q has an energy E = qV after passing through the potential V; if q is quoted in integer units of the elementary charge and the potential in volts, one gets an energy in eV.`,
+
+    thirdParagraph: `It is a common unit of energy within physics, widely used in solid state, atomic, nuclear, and particle physics. It is commonly used with the metric prefixes milli-, kilo-, mega-, giga-, tera-, peta- or exa- (meV, keV, MeV, GeV, TeV, PeV and EeV respectively). In some older documents, and in the name Bevatron, the symbol BeV is used, which stands for billion (109) electronvolts; it is equivalent to the GeV.`
   }
 ];
+
+
+const articleMaker = (dataElements) => {
+  const article = document.createElement('div')
+  article.classList.add('article')
+
+  const articleTitle = document.createElement('h2')
+  articleTitle.textContent = dataElements.title;
+  article.appendChild(articleTitle)
+
+  const date = document.createElement('p')
+  date.classList.add('date')
+  date.textContent = dataElements.date
+  article.appendChild(date)
+
+  const pharagraph1 = document.createElement('p')
+  pharagraph1.textContent = dataElements.firstParagraph
+  article.appendChild(pharagraph1)
+
+  const pharagraph2 = document.createElement('p')
+  pharagraph2.textContent = dataElements.secondParagraph
+  article.appendChild(pharagraph2)
+
+  const pharagraph3 = document.createElement('p')
+  pharagraph3.textContent = dataElements.thirdParagraph
+  article.appendChild(pharagraph3)
+
+  const expandBtn = document.createElement('span')
+  expandBtn.classList.add('expandButton')
+  expandBtn.addEventListener('click', () => {
+    article.classList.toggle('article-open')
+    if(article.classList.contains('article-open')) {
+      expandBtn.textContent = 'Click to Close'
+    } else {
+      expandBtn.textContent = 'Click to Expand'
+    }
+  })
+  expandBtn.textContent = 'Click to Expand'
+
+  const closeBtn = document.createElement('span')
+  closeBtn.textContent = '\u274c'
+  closeBtn.classList.add('closeButton')
+  closeBtn.addEventListener('click', event => {
+    article.classList.add('articleClose')
+  })
+  article.appendChild(closeBtn)
+  
+  article.appendChild(expandBtn)
+
+  return article
+}
+
+
+
+
 
 /* Step 1: Write a component called 'articleMaker' to create an article. You want your component to return markup like the template below: 
 
@@ -111,3 +175,19 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+const articlesElement = document.querySelector('.articles')
+data.forEach(el => {
+  articlesElement.appendChild(articleMaker(el))  
+})
+
+
+const submitBtnForm = document.querySelector('#submitButton')
+submitBtnForm.addEventListener('click', (e) => {
+  e.preventDefault()
+  const articleTitle = document.querySelector('#articleTitle').value
+  const articleDate = document.querySelector('#articleDate').value
+  const articleContent1 = document.querySelector('#articleContent1').value
+  const articleContent2 = document.querySelector('#articleContent2').value
+  const articleContent3 = document.querySelector('#articleContent3').value
+  articlesElement.appendChild(articleMaker({title: articleTitle, date: articleDate, firstParagraph: articleContent1, secondParagraph: articleContent2, thirdParagraph: articleContent3})) 
+})
